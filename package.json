@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "download_ev6": "curl 'https://en.eurovelo.com/route/get-gpx/29?developed=1' > ev6_full.gpx",
+    "download_ev9": "curl 'https://en.eurovelo.com/route/get-gpx/32?developed=1' > ev9_full.gpx",
+    "convert_ev6": "togeojson ev6_full.gpx > ev6_full.geojson",
+    "convert_ev9": "togeojson ev9_full.gpx > ev9_full.geojson",
+    "crop_ev6": "ogr2ogr ev6.geojson ev6_full.geojson -f GeoJSON -clipsrc 16.1918 48.1207 16.5770 48.3229",
+    "crop_ev9": "ogr2ogr ev9.geojson ev9_full.geojson -f GeoJSON -clipsrc 16.1918 48.1207 16.5770 48.3229",
+    "merge": "node merge.js",
+    "all": "npm run download_ev6 && npm run download_ev9 && npm run convert_ev6 && npm run convert_ev9 && npm run crop_ev6 && npm run crop_ev9 && npm run merge"
+  },
+  "dependencies": {
+    "@mapbox/togeojson": "^0.16.0"
+  }
+}
